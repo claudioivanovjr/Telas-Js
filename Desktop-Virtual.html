@@ -1,0 +1,162 @@
+<html>
+
+<head>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+	<link href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="jquery.dialogextend.js"></script>
+
+    <style>
+        .column {
+            width: 120px;
+            float: left;
+            padding-bottom: 50px;
+			margin-top: 20px;
+			margin-left: 10px;
+        }
+
+        .portlet-placeholder {
+            border: 1px dotted black;
+            margin: 0px 10px 10px 0px;
+            height: 100px;
+        }
+		
+		.ui-dialog .ui-dialog-content{
+			padding: 0;
+		}
+		
+		.btn{
+			width: 100px;
+			height: 100px;
+			white-space: normal;
+			margin-bottom: 10px;
+		}
+    </style>
+	
+</head>
+
+<body>
+	
+
+    <div class="column">
+        <div class="btn btn-default" id="btnModal" title="Abre com duplo click"><i class="fa fa-user-o" style="font-size: 40px;"></i><br/>Abrir MS</div>
+        <div class="btn btn-default" id="btnModal2" title="Abre com 1 click"><i class="fa fa-clock-o" style="font-size: 40px;" aria-hidden="true"></i><br/>Abrir Ubuntu</div>
+    </div>
+
+    <div class="column">
+    </div>
+
+    <div class="column">
+    </div>
+
+    <div class="column">
+    </div>
+
+    <div class="column">
+    </div>
+
+    <div class="ui-sortable">
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".column").sortable({
+                connectWith: ".column",
+                placeholder: "portlet-placeholder ui-corner-all",
+                //forceHelperSize: true,
+                forcePlaceholderSize: true,
+                //tolerance: 'pointer',
+                //opacity: 0.8,
+                revert: true,
+            });
+
+            $(".ui-sortable").sortable();
+
+            $("#btnModal").dblclick(function () {
+                if ($("#divModal").length == 0)
+                    $("<div id='divModal'></div>")
+                        //.html("<div id='divPagina'></div>")
+                        .html('<iframe style="border: 0px;" scrolling="auto" src="https://www.microsoft.com/pt-br" width="100%" height="100%"></iframe>')
+                        .dialog({
+                            "title": "Agenda",
+                            "width": ($(window).width()/2),
+                            "height": ($(window).height()/2),
+                            //"buttons": { "OK": function () { $(this).dialog("close"); } },
+                            "close": function (event, ui) { $(this).dialog('destroy').remove() }
+                        })
+                        .dialogExtend({
+                            "closable": true,
+                            "maximizable": true,
+                            "minimizable": true,
+                            //"collapsable": true,
+                            "dblclick": "maximize",
+                            //"titlebar": "transparent",
+                            "minimizeLocation": "left",
+                            //"icons": {
+                            //    "maximize": "ui-icon-circle-plus",
+                            //    "minimize": "ui-icon-circle-minus",
+                            //    "collapse": "ui-icon-triangle-1-s",
+                            //    "restore": "ui-icon-bullet",
+                            //    "close": "ui-icon-closethick"
+                            //},
+                            //"load": function (evt, dlg) { alert(evt.type); },
+                            //"beforeCollapse": function (evt, dlg) { alert(evt.type); },
+                            //"beforeMaximize": function (evt, dlg) { alert(evt.type); },
+                            //"beforeMinimize": function (evt, dlg) { alert(evt.type); },
+                            //"beforeRestore": function (evt, dlg) { alert(evt.type); },
+                            //"collapse": function (evt, dlg) { alert(evt.type); },
+                            //"maximize": function (evt, dlg) { alert(evt.type); },
+                            //"minimize": function (evt, dlg) { alert(evt.type); },
+                            //"restore": function (evt, dlg) { alert(evt.type); }
+                        });
+
+                //$("#divPagina").load("http://www.google.com.br");
+            });
+
+            $("#btnModal2").click(function () {
+				if ($("#divModal2").length == 0)
+					$("<div id='divModal2'>This is  content 2!!!</div>")
+						.html('<iframe style="border: 0px;" scrolling="auto" src="https://www.ubuntu.com/" width="100%" height="100%"></iframe>')
+						.dialog({
+							"title": "WebPonto",							
+							"width": ($(window).width()/3*2),
+                            "height": ($(window).height()/3*2),
+							//"buttons": { "OK": function () { $(this).dialog("close"); } },
+							"close": function (event, ui) { $(this).dialog('destroy').remove() }
+						})
+						.dialogExtend({
+							"closable": true,
+							"maximizable": true,
+							"minimizable": true,
+							//"collapsable": true,
+							"dblclick": "maximize",
+							//"titlebar": "transparent",
+							"minimizeLocation": "left",
+							//"icons": {
+							//    "maximize": "ui-icon-circle-plus",
+							//    "minimize": "ui-icon-circle-minus",
+							//    "collapse": "ui-icon-triangle-1-s",
+							//    "restore": "ui-icon-bullet",
+							//    "close": "ui-icon-closethick"
+							//},
+							//"load": function (evt, dlg) { alert(evt.type); },
+							//"beforeCollapse": function (evt, dlg) { alert(evt.type); },
+							//"beforeMaximize": function (evt, dlg) { alert(evt.type); },
+							//"beforeMinimize": function (evt, dlg) { alert(evt.type); },
+							//"beforeRestore": function (evt, dlg) { alert(evt.type); },
+							//"collapse": function (evt, dlg) { alert(evt.type); },
+							//"maximize": function (evt, dlg) { alert(evt.type); },
+							//"minimize": function (evt, dlg) { alert(evt.type); },
+							//"restore": function (evt, dlg) { alert(evt.type); }
+						});
+            });
+        });
+    </script>
+</body>
+
+</html>
